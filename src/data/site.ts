@@ -1,27 +1,28 @@
 export const profile = {
   name: "Patrick Millegan",
   tagline:
-    "I build practical product experiences with strong engineering fundamentals and a focus on shipping.",
+    "A project playground for prototypes, useful snippets, and things I am shipping in public.",
   about:
-    "This site is a living portfolio and project playground. I use it to share work, document experiments, and keep examples that help me move quickly while building new ideas.",
+    "This site is intentionally lightweight and iterative. I use it to test ideas, collect patterns worth reusing, and keep momentum on projects without overthinking structure.",
   linkedinUrl: "https://linkedin.com/in/pmillegan",
   email: "patrick@patrickmillegan.com",
 };
 
-export const timeline = [
+export const playgroundPillars = [
   {
-    period: "Current",
-    role: "Senior Software Engineer",
-    company: "Shopify",
+    title: "Build Fast",
     description:
-      "Working on product features and platform capabilities that improve customer account experiences at scale.",
+      "Start simple, ship quickly, and iterate from real usage instead of waiting for perfect plans.",
   },
   {
-    period: "Earlier",
-    role: "Software Engineer",
-    company: "Product Teams",
+    title: "Keep Useful References",
     description:
-      "Built and maintained user-facing applications, shipped end-to-end features, and collaborated closely with design and product.",
+      "Capture snippets, starter patterns, and examples so each new project can launch faster than the last one.",
+  },
+  {
+    title: "Show the Work",
+    description:
+      "Treat the site as a public notebook where experiments, improvements, and lessons learned are easy to share.",
   },
 ];
 
@@ -29,7 +30,7 @@ export const projects = [
   {
     name: "patrickmillegan.com",
     summary:
-      "Personal home base for writing, projects, and reusable examples. Designed to be simple now and easy to evolve later.",
+      "The main playground itself: a place to test UI ideas, publish references, and evolve a developer workflow in public.",
     tags: ["Next.js", "TypeScript", "Tailwind"],
     url: "https://patrickmillegan.com",
   },
@@ -41,7 +42,7 @@ export const projects = [
     url: "#",
   },
   {
-    name: "Project Template Starter",
+    name: "Project Starter Stack",
     summary:
       "Opinionated starter setup for launching side projects quickly with sensible defaults for speed and maintainability.",
     tags: ["Starter", "Developer Tooling"],

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Patrick Millegan",
   },
   description:
-    "Personal website and project hub for Patrick Millegan. Built with Next.js for simple publishing now and room to grow later.",
+    "Project playground for Patrick Millegan with experiments, reusable examples, and active builds.",
 };
 
 export default function RootLayout({
@@ -56,7 +56,7 @@ export default function RootLayout({
         </header>
         {children}
         <footer className="mx-auto mt-16 w-full max-w-5xl border-t border-zinc-200 px-6 py-8 text-sm text-zinc-600 sm:px-8">
-          <p>Built with Next.js and intended to evolve over time.</p>
+          <p>Built with Next.js as an always-evolving project playground.</p>
         </footer>
       </body>
     </html>

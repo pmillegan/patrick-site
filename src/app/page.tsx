@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { profile, projects, timeline } from "@/data/site";
+import { playgroundPillars, profile, projects } from "@/data/site";
 
 export default function Home() {
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-20 px-6 py-14 sm:px-8">
       <section className="space-y-6">
         <p className="inline-flex rounded-full border border-zinc-300 px-3 py-1 text-sm text-zinc-700">
-          Software Engineer
+          Project Playground
         </p>
         <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-zinc-900 sm:text-5xl">
           {profile.name}
@@ -46,12 +46,26 @@ export default function Home() {
       </section>
 
       <section className="space-y-5">
+        <h2 className="text-2xl font-semibold tracking-tight text-zinc-900">
+          Playground Rules
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {playgroundPillars.map((item) => (
+            <article key={item.title} className="rounded-xl border border-zinc-200 bg-white p-5">
+              <h3 className="text-lg font-semibold text-zinc-900">{item.title}</h3>
+              <p className="mt-2 leading-7 text-zinc-700">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-5">
         <div className="flex items-end justify-between gap-3">
           <h2 className="text-2xl font-semibold tracking-tight text-zinc-900">
-            Recent Work
+            Featured Playground Projects
           </h2>
           <Link href="/projects" className="text-sm font-medium text-zinc-700 underline">
-            See all projects
+            Explore all projects
           </Link>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -72,23 +86,6 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="space-y-5">
-        <h2 className="text-2xl font-semibold tracking-tight text-zinc-900">
-          Experience Snapshot
-        </h2>
-        <div className="space-y-4">
-          {timeline.map((item) => (
-            <article key={`${item.role}-${item.company}`} className="rounded-xl border border-zinc-200 p-5">
-              <p className="text-sm text-zinc-600">{item.period}</p>
-              <h3 className="mt-1 text-lg font-semibold text-zinc-900">
-                {item.role} - {item.company}
-              </h3>
-              <p className="mt-2 leading-7 text-zinc-700">{item.description}</p>
             </article>
           ))}
         </div>
