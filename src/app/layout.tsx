@@ -51,6 +51,14 @@ export default function RootLayout({
               >
                 LinkedIn
               </a>
+              <a
+                href="https://x.com/pmillegan"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-zinc-900"
+              >
+                X
+              </a>
             </nav>
           </div>
         </header>
