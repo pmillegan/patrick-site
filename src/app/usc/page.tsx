@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { uscQuestions } from "@/data/usc-questions";
+import { getUscAnswer } from "@/data/usc-answers";
 
 type Audience = "undergrad" | "grad";
 
@@ -96,25 +97,38 @@ export default async function UscQuestionsPage({
               </summary>
               <div className="mt-4 space-y-5">
                 {Object.entries(
-                  theme.sources.reduce<Record<string, string[]>>((acc, source) => {
+                  theme.sources.reduce<Record<string, { question: string }[]>>((acc, source) => {
                     if (!acc[source.asker]) {
                       acc[source.asker] = [];
                     }
-                    acc[source.asker].push(source.question);
+                    acc[source.asker].push({ question: source.question });
                     return acc;
                   }, {}),
                 ).map(([asker, questions]) => (
                   <section key={asker} className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
                     <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{asker}</h3>
                     <ul className="mt-3 space-y-3">
-                      {questions.map((question, index) => (
+                      {questions.map(({ question }, index) => {
+                        const answer = getUscAnswer(audience, asker, question);
+                        return (
                         <li
                           key={`${asker}-${index}`}
                           className="text-sm leading-6 text-zinc-700 dark:text-zinc-300"
                         >
-                          {question}
+                          <p>{question}</p>
+                          {answer ? (
+                            <details className="mt-2 rounded-md border border-zinc-200 bg-zinc-50 p-3 dark:border-zinc-700 dark:bg-zinc-950">
+                              <summary className="cursor-pointer text-xs font-medium uppercase tracking-wide text-zinc-600 dark:text-zinc-300">
+                                View answer
+                              </summary>
+                              <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+                                {answer}
+                              </p>
+                            </details>
+                          ) : null}
                         </li>
-                      ))}
+                        );
+                      })}
                     </ul>
                   </section>
                 ))}
