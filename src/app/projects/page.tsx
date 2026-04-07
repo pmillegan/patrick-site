@@ -1,9 +1,17 @@
-import Link from "next/link";
+import Image from "next/image";
 import { projectLinks } from "@/data/site";
+
+function getProjectDomain(url: string) {
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return url;
+  }
+}
 
 export default function ProjectsPage() {
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-6 py-14 sm:px-8">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-10 px-6 py-14 sm:px-8">
       <header className="space-y-3">
         <p className="text-sm uppercase tracking-wide text-zinc-600">Projects</p>
         <h1 className="text-4xl font-semibold tracking-tight text-zinc-900">
@@ -16,9 +24,25 @@ export default function ProjectsPage() {
 
       <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
         <ul className="space-y-3">
-          {projectLinks.map((project) => (
-            <li key={project.name} className="flex items-center justify-between gap-4 border-b border-zinc-100 pb-3 last:border-b-0 last:pb-0">
-              <span className="font-medium text-zinc-900">{project.name}</span>
+          {projectLinks.map((project) => {
+            const domain = getProjectDomain(project.url);
+            const faviconUrl = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
+
+            return (
+              <li
+                key={project.name}
+                className="flex items-center justify-between gap-4 border-b border-zinc-100 pb-3 last:border-b-0 last:pb-0"
+              >
+                <div className="flex items-center gap-3">
+                  <Image
+                    src={faviconUrl}
+                    alt={`${project.name} favicon`}
+                    width={20}
+                    height={20}
+                    className="rounded-sm"
+                  />
+                  <span className="font-medium text-zinc-900">{project.name}</span>
+                </div>
               <a
                 href={project.url}
                 target="_blank"
@@ -27,17 +51,12 @@ export default function ProjectsPage() {
               >
                 Visit
               </a>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
       </section>
 
-      <section className="rounded-xl border border-zinc-200 bg-zinc-50 p-6 text-sm text-zinc-700">
-        Add links to new projects in `src/data/site.ts`.
-        <Link href="/" className="mt-4 inline-block text-sm font-medium text-zinc-900 underline">
-          Back to home
-        </Link>
-      </section>
     </main>
   );
 }

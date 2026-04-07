@@ -45,35 +45,13 @@ export default function RootLayout({
               PATRICK MILLEGAN
             </Link>
             <nav className="flex items-center gap-5 text-sm text-zinc-700">
-              <Link href="/" className="hover:text-zinc-900">
-                Home
-              </Link>
               <Link href="/projects" className="hover:text-zinc-900">
                 Projects
               </Link>
-              <a
-                href="https://linkedin.com/in/pmillegan"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-zinc-900"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://x.com/pmillegan"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-zinc-900"
-              >
-                X
-              </a>
             </nav>
           </div>
         </header>
         {children}
-        <footer className="mx-auto mt-16 w-full max-w-5xl border-t border-zinc-200 px-6 py-8 text-sm text-zinc-600 sm:px-8">
-          <p>Built with Next.js as an always-evolving project playground.</p>
-        </footer>
       </body>
     </html>
   );
