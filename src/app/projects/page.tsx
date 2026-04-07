@@ -17,9 +17,6 @@ export default function ProjectsPage() {
         <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
           Project links
         </h1>
-        <p className="max-w-3xl text-lg leading-8 text-zinc-700 dark:text-zinc-300">
-          A simple list for now. As new things ship, they can be added here.
-        </p>
       </header>
 
       <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
