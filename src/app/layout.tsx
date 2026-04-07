@@ -54,6 +54,9 @@ export default function RootLayout({
               <Link href="/projects" className="hover:text-zinc-900 dark:hover:text-zinc-100">
                 Projects
               </Link>
+              <Link href="/darkvoid" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+                Darkvoid
+              </Link>
             </nav>
           </div>
         </header>
