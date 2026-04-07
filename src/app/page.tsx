@@ -4,8 +4,8 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 items-center px-6 py-14 sm:px-8">
-      <section className="grid w-full items-center gap-10 rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm md:grid-cols-[280px_1fr]">
-        <div className="mx-auto w-full max-w-[280px] overflow-hidden rounded-xl border border-zinc-200">
+      <section className="grid w-full items-center gap-10 rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 md:grid-cols-[280px_1fr]">
+        <div className="mx-auto w-full max-w-[280px] overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
           <Image
             src="/profile.jpg"
             alt="Portrait of Patrick Millegan"
@@ -16,13 +16,13 @@ export default function Home() {
           />
         </div>
         <div className="space-y-6">
-          <p className="inline-flex rounded-full border border-zinc-300 px-3 py-1 text-sm text-zinc-700">
+          <p className="inline-flex rounded-full border border-zinc-300 px-3 py-1 text-sm text-zinc-700 dark:border-zinc-700 dark:text-zinc-300">
             Product Developer
           </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 sm:text-5xl">
+          <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
             Patrick Millegan
           </h1>
-          <p className="max-w-2xl text-lg leading-8 text-zinc-700">
+          <p className="max-w-2xl text-lg leading-8 text-zinc-700 dark:text-zinc-300">
             Patrick Millegan is a San Mateo based product developer building all
             sorts of fun projects. Reach out via LinkedIn or X and say hi.
           </p>
@@ -31,7 +31,7 @@ export default function Home() {
               href="https://linkedin.com/in/pmillegan"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-900 transition hover:bg-zinc-100"
+              className="inline-flex items-center gap-2 rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-900 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-100 dark:hover:bg-zinc-800"
               aria-label="LinkedIn profile"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
@@ -46,7 +46,7 @@ export default function Home() {
               href="https://x.com/pmillegan"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-900 transition hover:bg-zinc-100"
+              className="inline-flex items-center gap-2 rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-900 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-100 dark:hover:bg-zinc-800"
               aria-label="X profile"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
@@ -59,7 +59,7 @@ export default function Home() {
             </a>
             <Link
               href="/projects"
-              className="inline-flex items-center rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700"
+              className="inline-flex items-center rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
             >
               View projects
             </Link>

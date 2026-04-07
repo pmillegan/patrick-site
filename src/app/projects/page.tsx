@@ -13,16 +13,16 @@ export default function ProjectsPage() {
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-10 px-6 py-14 sm:px-8">
       <header className="space-y-3">
-        <p className="text-sm uppercase tracking-wide text-zinc-600">Projects</p>
-        <h1 className="text-4xl font-semibold tracking-tight text-zinc-900">
+        <p className="text-sm uppercase tracking-wide text-zinc-600 dark:text-zinc-400">Projects</p>
+        <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
           Project links
         </h1>
-        <p className="max-w-3xl text-lg leading-8 text-zinc-700">
+        <p className="max-w-3xl text-lg leading-8 text-zinc-700 dark:text-zinc-300">
           A simple list for now. As new things ship, they can be added here.
         </p>
       </header>
 
-      <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+      <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
         <ul className="space-y-3">
           {projectLinks.map((project) => {
             const domain = getProjectDomain(project.url);
@@ -31,7 +31,7 @@ export default function ProjectsPage() {
             return (
               <li
                 key={project.name}
-                className="flex items-center justify-between gap-4 border-b border-zinc-100 pb-3 last:border-b-0 last:pb-0"
+                className="flex items-center justify-between gap-4 border-b border-zinc-100 pb-3 last:border-b-0 last:pb-0 dark:border-zinc-800"
               >
                 <div className="flex items-center gap-3">
                   <Image
@@ -43,19 +43,19 @@ export default function ProjectsPage() {
                   />
                   <div>
                     <div className="flex items-center gap-2">
-                      <p className="font-medium text-zinc-900">{project.name}</p>
-                      <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-zinc-700">
+                      <p className="font-medium text-zinc-900 dark:text-zinc-100">{project.name}</p>
+                      <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
                         {project.badge}
                       </span>
                     </div>
-                    <p className="text-sm text-zinc-600">{project.description}</p>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400">{project.description}</p>
                   </div>
                 </div>
               <a
                 href={project.url}
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm font-medium text-zinc-700 underline hover:text-zinc-900"
+                className="text-sm font-medium text-zinc-700 underline hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
               >
                 Visit
               </a>
