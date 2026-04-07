@@ -37,7 +37,10 @@ export default function Home() {
               <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
                 <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M8.34 18.34V10.82H5.84V18.34H8.34M7.09 9.79A1.45 1.45 0 1 0 7.09 6.89A1.45 1.45 0 1 0 7.09 9.79M18.34 18.34V14.22C18.34 12 17.14 10.66 15.35 10.66C13.9 10.66 13.26 11.46 12.89 12.02V10.82H10.39V18.34H12.89V14.17C12.89 13.07 13.1 12 14.47 12C15.82 12 15.84 13.26 15.84 14.24V18.34H18.34Z" />
               </svg>
-              LinkedIn
+              Pmillegan
+              <svg viewBox="0 0 24 24" aria-hidden="true" className="h-3.5 w-3.5 fill-current">
+                <path d="M14 3H21V10H19V6.41L12.7 12.71L11.29 11.29L17.59 5H14V3ZM5 5H10V7H7V17H17V14H19V19H5V5Z" />
+              </svg>
             </a>
             <a
               href="https://x.com/pmillegan"
@@ -49,7 +52,10 @@ export default function Home() {
               <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
                 <path d="M18.9 2H22L15.2 9.78L23.2 22H16.94L12.05 14.62L5.6 22H2.5L9.8 13.65L2.2 2H8.62L13.03 8.74L18.9 2ZM17.81 20.13H19.53L7.68 3.78H5.83L17.81 20.13Z" />
               </svg>
-              X
+              @Pmillegan
+              <svg viewBox="0 0 24 24" aria-hidden="true" className="h-3.5 w-3.5 fill-current">
+                <path d="M14 3H21V10H19V6.41L12.7 12.71L11.29 11.29L17.59 5H14V3ZM5 5H10V7H7V17H17V14H19V19H5V5Z" />
+              </svg>
             </a>
             <Link
               href="/projects"
