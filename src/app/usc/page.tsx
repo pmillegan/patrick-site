@@ -78,14 +78,31 @@ export default async function UscQuestionsPage({
               <summary className="cursor-pointer text-sm font-medium text-zinc-800 dark:text-zinc-200">
                 View source questions ({theme.questionCount})
               </summary>
-              <ul className="mt-3 space-y-2">
-                {theme.sources.map((source, index) => (
-                  <li key={`${source.asker}-${index}`} className="text-sm text-zinc-700 dark:text-zinc-300">
-                    <span className="font-medium text-zinc-900 dark:text-zinc-100">{source.asker}: </span>
-                    {source.question}
-                  </li>
+              <div className="mt-4 space-y-5">
+                {Object.entries(
+                  theme.sources.reduce<Record<string, string[]>>((acc, source) => {
+                    if (!acc[source.asker]) {
+                      acc[source.asker] = [];
+                    }
+                    acc[source.asker].push(source.question);
+                    return acc;
+                  }, {}),
+                ).map(([asker, questions]) => (
+                  <section key={asker} className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
+                    <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{asker}</h3>
+                    <ul className="mt-3 space-y-3">
+                      {questions.map((question, index) => (
+                        <li
+                          key={`${asker}-${index}`}
+                          className="text-sm leading-6 text-zinc-700 dark:text-zinc-300"
+                        >
+                          {question}
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
                 ))}
-              </ul>
+              </div>
             </details>
           </article>
         ))}
