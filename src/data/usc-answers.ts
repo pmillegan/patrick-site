@@ -96,6 +96,59 @@ const uscAnswers: UscAnswer[] = [
     answer:
       "It was intense and extremely eye-opening. It forced true first-principles product thinking because assumptions that are common in US markets did not hold. You have to design e-commerce for realities like users without credit cards and inconsistent address systems, while still making the purchase and delivery experience work end to end. It also highlighted talent-shape differences by market: in Southeast Asia I saw especially strong engineering, data science, and operations talent, while product/design maturity looked different than what I was used to in the US. The way I adapted was direct immersion: meeting people in-market, talking constantly, and grounding decisions in local context rather than imported assumptions.",
   },
+  {
+    audience: "undergrad",
+    asker: "Kayden Wilmoth-Thomas",
+    question: "What were the biggest challenges starting Keap Athletics while working full-time?",
+    answer:
+      "The biggest challenge is energy and focus. A full-time role can consume most of your creative bandwidth, and when you are tired you also have fewer resources than you do at work. Two things help: choose projects that genuinely energize you, and build with people who energize you. Also be thoughtful about scope and conflict boundaries. It is best to keep side projects non-competing, frame them clearly as separate from your core role, and make sure your team knows they are not a distraction.",
+  },
+  {
+    audience: "undergrad",
+    asker: "Alex Chanawatr",
+    question:
+      "Since you’ve launched features for both merchants and app partners, what’s been most challenging about building something that works well for so many different users?",
+    answer:
+      "The hardest part is unseating systems that have worked a certain way for a long time while coordinating many hidden stakeholder groups. Publishing plans and product intent helps because the people who care most become a magnet and provide critical context early. You then have to think deeply about enablement for each group: what merchants need, what partners need, and what each group must do to adopt. A recurring challenge is the chicken-and-egg dynamic: merchants want partner support before adopting, while partners want adoption before investing. Managing that sequencing is usually the toughest part.",
+  },
+  {
+    audience: "undergrad",
+    asker: "Joe Gitti DiVita",
+    question:
+      "Does running your own Shopify store actually change how you build, or does it mostly just confirm what you already know?",
+    answer:
+      "It changes how you build in a major way. Running a store gives direct understanding of the merchant-buyer relationship, and merchants make decisions based on buyer outcomes. That first-hand context improves judgment and often lets you see around corners faster. It can also increase confidence in certain decisions that might look risky to others, because you have personally lived the workflow. In general, the strongest product vision tends to come from people who deeply experience the customer reality themselves.",
+  },
+  {
+    audience: "undergrad",
+    asker: "Dylan D'Agostino",
+    question:
+      "The customer accounts product touches authentication, identity, post-purchase experience, and developer platform all at once. How do you manage stakeholder alignment when your product sits at the intersection of that many teams and priorities inside Shopify?",
+    answer:
+      "Alignment starts with publishing strategy and plans clearly, then proactively identifying dependencies so roadmap conversations happen early. Once execution begins, you need to stay agile and adapt quickly as other teams change priorities. That requires knowing your space deeply so you can represent tradeoffs and implications at a moment's notice. When priorities shift, over-communicate quickly to every affected group. A clear strategic framework makes this much easier because everyone can evaluate changes against shared priorities.",
+  },
+  {
+    audience: "undergrad",
+    asker: "Elijah Varela",
+    question: "What’s a user behavior that surprised you, and how did it change your product priorities?",
+    answer:
+      "I try to minimize true surprises by talking to users early and often before committing to scope, so unexpected behavior is less about shock and more about signal strength. Most directional bets are right, but occasionally user pain is more urgent than expected and we have to move faster than planned. The lesson is to keep discovery tight and stay ready to accelerate when real-world feedback reveals higher urgency.",
+  },
+  {
+    audience: "undergrad",
+    asker: "Leyna Nguyen",
+    question: "How did it change the way you built or prioritized the product?",
+    answer:
+      "When feedback shows a problem is more severe than expected, it shifts prioritization toward fast remediation and clearer execution focus. In practice, that means tightening scope around the highest-friction issues first and re-ordering work to protect user outcomes before secondary improvements.",
+  },
+  {
+    audience: "undergrad",
+    asker: "Leyna Nguyen",
+    question:
+      "As students looking to break into product management, what is a skill that you would prioritize building, especially with how AI is changing the role?",
+    answer:
+      "Prioritize storytelling, relationship building with real users, and rapid prototyping. Strong prototypes communicate intent far better than long explanations and make feedback loops faster. With AI, PM work is moving up a level: less emphasis on managing every execution detail and more emphasis on asking the right questions, choosing what to build, and confidently showing work early to gather signal. In short, think more like a strategic product leader earlier in your career.",
+  },
 ];
 
 function normalize(value: string) {
