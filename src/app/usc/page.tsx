@@ -17,7 +17,14 @@ export default async function UscQuestionsPage({
 }) {
   const params = await searchParams;
   const audience = audienceFromParam(params.audience);
-  const themes = audience === "grad" ? uscQuestions.grad : uscQuestions.undergrad;
+  const themes = (audience === "grad" ? uscQuestions.grad : uscQuestions.undergrad)
+    .slice()
+    .sort((a, b) => {
+      if (b.askers.length !== a.askers.length) {
+        return b.askers.length - a.askers.length;
+      }
+      return b.questionCount - a.questionCount;
+    });
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-6 py-14 sm:px-8">
