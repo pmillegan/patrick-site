@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { hasSupabasePublicEnv } from "@/lib/supabase/env";
 
 const VALID_AUDIENCES = new Set(["undergrad", "grad"]);
 
@@ -12,12 +13,37 @@ type LectureQuestionInsert = {
   consent_followup: boolean;
 };
 
+function getSupabaseClientOrError() {
+  if (!hasSupabasePublicEnv()) {
+    return {
+      error: NextResponse.json(
+        {
+          error:
+            "Supabase environment variables are missing. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.",
+        },
+        { status: 500 },
+      ),
+    };
+  }
+
+  try {
+    return { client: createSupabaseAdminClient() };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unable to initialize Supabase client.";
+    return { error: NextResponse.json({ error: message }, { status: 500 }) };
+  }
+}
+
 export async function GET(request: NextRequest) {
   const audience = request.nextUrl.searchParams.get("audience");
   const limitParam = Number.parseInt(request.nextUrl.searchParams.get("limit") ?? "200", 10);
   const limit = Number.isFinite(limitParam) ? Math.min(Math.max(limitParam, 1), 500) : 200;
 
-  const supabase = createSupabaseAdminClient();
+  const supabaseResult = getSupabaseClientOrError();
+  if (!supabaseResult.client) {
+    return supabaseResult.error;
+  }
+  const supabase = supabaseResult.client;
   let query = supabase
     .from("lecture_questions")
     .select("id, audience, asker_name, question_text, status, created_at")
@@ -38,6 +64,12 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const supabaseResult = getSupabaseClientOrError();
+  if (!supabaseResult.client) {
+    return supabaseResult.error;
+  }
+  const supabase = supabaseResult.client;
+
   const body = await request.json().catch(() => null);
   if (!body || typeof body !== "object") {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
@@ -76,7 +108,6 @@ export async function POST(request: NextRequest) {
     consent_followup: Boolean(body.consent_followup),
   };
 
-  const supabase = createSupabaseAdminClient();
   const { data, error } = await supabase
     .from("lecture_questions")
     .insert(payload)

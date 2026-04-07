@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { hasSupabasePublicEnv } from "@/lib/supabase/env";
 
 type Audience = "undergrad" | "grad";
 
@@ -17,14 +18,41 @@ export default async function UscAdminPage({
 }) {
   const params = await searchParams;
   const audience = parseAudience(params.audience);
-  const supabase = createSupabaseAdminClient();
+  let data:
+    | Array<{
+        id: string;
+        asker_name: string | null;
+        question_text: string;
+        status: string;
+        created_at: string;
+        is_anonymous: boolean;
+      }>
+    | null = null;
+  let errorMessage: string | null = null;
 
-  const { data, error } = await supabase
-    .from("lecture_questions")
-    .select("id, asker_name, question_text, status, created_at, is_anonymous")
-    .eq("audience", audience)
-    .order("created_at", { ascending: false })
-    .limit(500);
+  if (!hasSupabasePublicEnv()) {
+    errorMessage =
+      "Supabase environment variables are missing in this deployment. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.";
+  } else {
+    try {
+      const supabase = createSupabaseAdminClient();
+      const { data: rows, error } = await supabase
+        .from("lecture_questions")
+        .select("id, asker_name, question_text, status, created_at, is_anonymous")
+        .eq("audience", audience)
+        .order("created_at", { ascending: false })
+        .limit(500);
+
+      if (error) {
+        errorMessage = error.message;
+      } else {
+        data = rows;
+      }
+    } catch (error) {
+      errorMessage =
+        error instanceof Error ? error.message : "Unexpected error loading lecture questions.";
+    }
+  }
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-6 py-14 sm:px-8">
@@ -65,9 +93,9 @@ export default async function UscAdminPage({
       </header>
 
       <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-        {error ? (
+        {errorMessage ? (
           <p className="text-sm text-red-600 dark:text-red-400">
-            Could not load questions: {error.message}
+            Could not load questions: {errorMessage}
           </p>
         ) : (
           <ul className="space-y-3">
