@@ -32,6 +32,20 @@ export default async function UscQuestionsPage({
         <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
           USC Questions
         </h1>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/usc/submit"
+            className="rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+          >
+            Submit question
+          </Link>
+          <Link
+            href="/usc/admin"
+            className="rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            Admin view
+          </Link>
+        </div>
         <div className="inline-flex rounded-full border border-zinc-300 bg-white p-1 dark:border-zinc-700 dark:bg-zinc-900">
           <Link
             href="/usc?audience=undergrad"
