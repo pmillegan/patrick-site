@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Image from "next/image";
 import Link from "next/link";
 import ThemeModeSelect from "@/components/theme-mode-select";
 import "./globals.css";
@@ -47,7 +48,10 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
         <header className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
           <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4 sm:px-8">
-            <Link href="/" className="text-sm font-semibold tracking-wide text-zinc-900 dark:text-zinc-100">
+            <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-zinc-900 dark:text-zinc-100">
+              <span className="inline-flex h-7 w-7 overflow-hidden rounded-full border border-zinc-300 dark:border-zinc-700">
+                <Image src="/profile.jpg" alt="Patrick Millegan" width={56} height={56} className="h-full w-full object-cover" />
+              </span>
               PATRICK MILLEGAN
             </Link>
             <nav className="flex items-center gap-5 text-sm text-zinc-700 dark:text-zinc-300">

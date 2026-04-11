@@ -12,7 +12,7 @@ export default function UscThankYouPage() {
         </p>
         <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
           <p className="font-medium text-zinc-900 dark:text-zinc-100">Stay in touch</p>
-          <p>Email: patrickmillegan@gmail.com</p>
+          <p>Email: PatrickMillegan@gmail.com</p>
           <p>
             LinkedIn:{" "}
             <a
