@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 type EngagementKey = "twitter" | "linkedin" | "post";
@@ -88,6 +89,37 @@ export default function UscEngagementCard() {
         <p className="text-sm leading-6 text-zinc-700 dark:text-zinc-300">
           I would love to stay connected with everyone from USC Marshall. Keep in touch through the links below.
         </p>
+
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-4">
+          <figure className="min-w-0">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
+              <Image
+                src="/undergrad.jpg"
+                alt="USC Marshall undergraduate class"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 640px) 45vw, 400px"
+              />
+            </div>
+            <figcaption className="mt-1.5 text-center text-xs font-medium text-zinc-500 dark:text-zinc-400">
+              Undergrad
+            </figcaption>
+          </figure>
+          <figure className="min-w-0">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
+              <Image
+                src="/grad.jpg"
+                alt="USC Marshall graduate class"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 640px) 45vw, 400px"
+              />
+            </div>
+            <figcaption className="mt-1.5 text-center text-xs font-medium text-zinc-500 dark:text-zinc-400">
+              Grad
+            </figcaption>
+          </figure>
+        </div>
       </div>
 
       <div className="mt-5 space-y-2">
