@@ -1,3 +1,7 @@
+/** LinkedIn post for the USC guest lecture (same as “Like, comment, or repost” on USC pages). */
+export const USC_LINKEDIN_GUEST_LECTURE_POST_HREF =
+  "https://www.linkedin.com/feed/update/urn:li:ugcPost:7448413039529422848/";
+
 export type ProjectLink = {
   name: string;
   url: string;
@@ -29,9 +33,8 @@ export const projectLinks: ProjectLink[] = [
   },
   {
     name: "Guest lecturing for USC",
-    url: "https://patrickmillegan.com/usc",
+    url: USC_LINKEDIN_GUEST_LECTURE_POST_HREF,
     faviconDomain: "usc.edu",
-    showVisit: false,
     description:
       "Guest lecturing on product management at the USC Marshall School of Business.",
   },

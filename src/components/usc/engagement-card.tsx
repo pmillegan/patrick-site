@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { USC_LINKEDIN_GUEST_LECTURE_POST_HREF } from "@/data/site";
 
 type EngagementKey = "twitter" | "linkedin" | "post";
 type EngagementIcon = "x" | "linkedin" | "slides" | "diamond";
@@ -21,7 +22,7 @@ const engagementLinks: Array<{ id: EngagementKey; label: string; href: string; i
   {
     id: "post",
     label: "Like, comment, or repost",
-    href: "https://www.linkedin.com/feed/update/urn:li:ugcPost:7448413039529422848/",
+    href: USC_LINKEDIN_GUEST_LECTURE_POST_HREF,
     icon: "linkedin",
   },
   {
