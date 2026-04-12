@@ -9,7 +9,7 @@ type EngagementIcon = "x" | "linkedin" | "slides" | "diamond";
 
 /** Google Slides deck for the USC guest lecture (shared with undergrad/grad pages). */
 export const USC_GUEST_LECTURE_SLIDES_HREF =
-  "https://docs.google.com/presentation/d/1t-QWHfj7BuqiJWnbgr-dNz-pRr7dnfvd0ZR2lQnJOK8/edit?slide=id.g3dd2f17c201_0_247#slide=id.g3dd2f17c201_0_247";
+  "https://docs.google.com/presentation/d/1t-QWHfj7BuqiJWnbgr-dNz-pRr7dnfvd0ZR2lQnJOK8/edit?slide=id.p#slide=id.p";
 
 const engagementLinks: Array<{ id: EngagementKey; label: string; href: string; icon: EngagementIcon }> = [
   {
