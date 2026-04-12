@@ -138,8 +138,6 @@ export default function UscEngagementCard({
     }
   }
 
-  const allLinksClicked = linkRows.every((item) => clicked[item.id]);
-
   return (
     <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
       <div className="space-y-2">
@@ -201,12 +199,6 @@ export default function UscEngagementCard({
             </a>
           ))}
 
-          {allLinksClicked ? (
-            <p className="mt-3 text-sm font-medium text-green-700 dark:text-green-300">
-              Hey, you&apos;ve completed this state.
-            </p>
-          ) : null}
-
           {photoLayout === "undergrad" ? (
             <Link
               href="/darkvoid"
@@ -247,7 +239,6 @@ export default function UscEngagementCard({
                   <span className="shrink-0 text-zinc-700 dark:text-zinc-300">
                     <RowIcon icon="email" />
                   </span>
-                  <span className="shrink-0 font-medium">Email</span>
                   <span className="min-w-0 flex-1 cursor-text truncate font-bold select-text">
                     PatrickMillegan@gmail.com
                   </span>
@@ -275,7 +266,6 @@ export default function UscEngagementCard({
                   <span className="text-zinc-700 dark:text-zinc-300">
                     <RowIcon icon="email" />
                   </span>
-                  <span className="min-w-0 font-medium">Email</span>
                   <span className="min-w-0 cursor-text truncate font-bold select-text">
                     PatrickMillegan@gmail.com
                   </span>

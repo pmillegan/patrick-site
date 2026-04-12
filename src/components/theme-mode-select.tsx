@@ -50,8 +50,7 @@ export default function ThemeModeSelect() {
   };
 
   return (
-    <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-300">
-      Theme
+    <div className="flex items-center">
       <select
         value={mode}
         onChange={(event) => onChange(event.target.value as ThemeMode)}
@@ -62,6 +61,6 @@ export default function ThemeModeSelect() {
         <option value="light">Light</option>
         <option value="dark">Dark</option>
       </select>
-    </label>
+    </div>
   );
 }
