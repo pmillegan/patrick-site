@@ -150,10 +150,9 @@ export default function UscEngagementCard({
           I had a blast chatting with you all!
         </h2>
         {personalIntro ? (
-          <div className="space-y-1 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
-            <p>I would love to stay connected with you!</p>
-            <p>Keep in touch through the links below.</p>
-          </div>
+          <p className="text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+            I would love to stay connected. Keep in touch through the links below.
+          </p>
         ) : (
           <p className="text-sm leading-6 text-zinc-700 dark:text-zinc-300">
             I would love to stay connected with everyone from USC Marshall. Keep in touch through the links below.
