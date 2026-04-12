@@ -4,14 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-type EngagementKey = "twitter" | "linkedin" | "post" | "slides" | "darkvoid";
+type EngagementKey = "twitter" | "linkedin" | "post";
 type EngagementIcon = "x" | "linkedin" | "slides" | "diamond";
 
 /** Google Slides deck for the USC guest lecture (shared with undergrad/grad pages). */
 export const USC_GUEST_LECTURE_SLIDES_HREF =
   "https://docs.google.com/presentation/d/1t-QWHfj7BuqiJWnbgr-dNz-pRr7dnfvd0ZR2lQnJOK8/edit?slide=id.g3dd2f17c201_0_247#slide=id.g3dd2f17c201_0_247";
 
-const engagementLinks: Array<{ id: Exclude<EngagementKey, "slides">; label: string; href: string; icon: EngagementIcon }> = [
+const engagementLinks: Array<{ id: EngagementKey; label: string; href: string; icon: EngagementIcon }> = [
   {
     id: "linkedin",
     label: "Connect with me on LinkedIn",
@@ -20,7 +20,7 @@ const engagementLinks: Array<{ id: Exclude<EngagementKey, "slides">; label: stri
   },
   {
     id: "post",
-    label: "Like, comment, or repost!",
+    label: "Like, comment, or repost",
     href: "https://www.linkedin.com/feed/update/urn:li:ugcPost:7448413039529422848/",
     icon: "linkedin",
   },
@@ -82,7 +82,7 @@ type UscEngagementCardProps = {
   photoLayout?: UscEngagementPhotoLayout;
   /** `split`: tasks | photo side-by-side from md up. `stack`: tasks full width, then photo full width at all breakpoints. */
   layout?: "split" | "stack";
-  /** When set, adds a row after “Follow me on X” linking to the guest lecture slides (undergrad/grad). */
+  /** When set, adds a Presentation slides row below the class photo(s). */
   presentationHref?: string;
   /** Shorter “you” intro for `/usc-undergrad` and `/usc-grad`; default keeps Marshall wording for `/usc`. */
   personalIntro?: boolean;
@@ -97,23 +97,11 @@ export default function UscEngagementCard({
   const isStacked = layout === "stack";
   /** Undergrad + grad pages: whole email row copies; combined `/usc` keeps a dedicated Copy control. */
   const emailRowFullyClickable = isStacked && photoLayout !== "both";
-  const linkRows: Array<{ id: EngagementKey; label: string; href: string; icon: EngagementIcon }> = presentationHref
-    ? [
-        ...engagementLinks,
-        {
-          id: "slides",
-          label: "View presentation slides",
-          href: presentationHref,
-          icon: "slides",
-        },
-      ]
-    : [...engagementLinks];
+  const linkRows: Array<{ id: EngagementKey; label: string; href: string; icon: EngagementIcon }> = [...engagementLinks];
   const [clicked, setClicked] = useState<Record<EngagementKey, boolean>>({
     linkedin: false,
     post: false,
     twitter: false,
-    slides: false,
-    darkvoid: false,
   });
   const [emailCopied, setEmailCopied] = useState(false);
 
@@ -138,9 +126,58 @@ export default function UscEngagementCard({
     }
   }
 
+  const resourceRows =
+    presentationHref || photoLayout === "undergrad" ? (
+      <div className="space-y-1">
+        {presentationHref ? (
+          <a
+            href={presentationHref}
+            target="_blank"
+            rel="noreferrer"
+            className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-sm font-medium text-zinc-800 transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            <span className="inline-flex items-center gap-1">
+              <span className="text-zinc-700 dark:text-zinc-300">
+                <RowIcon icon="slides" />
+              </span>
+              <span>Presentation slides</span>
+            </span>
+            <span
+              aria-hidden="true"
+              className={`inline-flex items-center justify-center rounded-full border border-zinc-300 py-1 text-xs font-semibold text-zinc-600 dark:border-zinc-600 dark:text-zinc-300 ${actionPillWidthClass}`}
+            >
+              View
+            </span>
+          </a>
+        ) : null}
+        {photoLayout === "undergrad" ? (
+          <Link
+            href="/darkvoid"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="In-class exercise — the Dark Void page on patrickmillegan.com"
+            className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-sm font-medium text-zinc-800 transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            <span className="inline-flex min-w-0 items-center gap-1">
+              <span className="text-zinc-700 dark:text-zinc-300">
+                <RowIcon icon="diamond" />
+              </span>
+              <span>Dark Void</span>
+            </span>
+            <span
+              aria-hidden="true"
+              className={`inline-flex items-center justify-center rounded-full border border-zinc-300 py-1 text-xs font-semibold text-zinc-600 dark:border-zinc-600 dark:text-zinc-300 ${actionPillWidthClass}`}
+            >
+              View
+            </span>
+          </Link>
+        ) : null}
+      </div>
+    ) : null;
+
   return (
-    <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-      <div className="space-y-2">
+    <section className="rounded-2xl border border-zinc-200 bg-white p-3 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="space-y-1">
         <h2 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
           <span aria-hidden="true" className="mr-2">
             👋
@@ -161,11 +198,11 @@ export default function UscEngagementCard({
       <div
         className={
           isStacked
-            ? "mt-5 flex flex-col gap-6"
-            : "mt-5 grid grid-cols-1 gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] md:items-stretch md:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)]"
+            ? "mt-2.5 flex flex-col gap-3"
+            : "mt-2.5 grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] md:items-stretch md:gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)]"
         }
       >
-        <div className="min-w-0 w-full space-y-2">
+        <div className="min-w-0 w-full space-y-1">
           {linkRows.map((item) => (
             <a
               key={item.id}
@@ -173,9 +210,9 @@ export default function UscEngagementCard({
               target="_blank"
               rel="noreferrer"
               onClick={() => onLinkClick(item.id)}
-              className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-4 py-3 text-sm font-medium text-zinc-800 transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+              className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-sm font-medium text-zinc-800 transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
             >
-              <span className="inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1">
                 <span className="text-zinc-700 dark:text-zinc-300">
                   <RowIcon icon={item.icon} />
                 </span>
@@ -193,49 +230,16 @@ export default function UscEngagementCard({
                   aria-hidden="true"
                   className={`inline-flex items-center justify-center rounded-full border border-zinc-300 py-1 text-xs font-semibold text-zinc-600 dark:border-zinc-600 dark:text-zinc-300 ${actionPillWidthClass}`}
                 >
-                  Go
+                  Go!
                 </span>
               )}
             </a>
           ))}
 
-          {photoLayout === "undergrad" ? (
-            <Link
-              href="/darkvoid"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="In-class exercise — the Dark Void page on patrickmillegan.com"
-              onClick={() => onLinkClick("darkvoid")}
-              className="mt-3 flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-4 py-3 text-sm font-medium text-zinc-800 transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
-            >
-              <span className="inline-flex min-w-0 items-center gap-2">
-                <span className="text-zinc-700 dark:text-zinc-300">
-                  <RowIcon icon="diamond" />
-                </span>
-                <span>View Dark Void</span>
-              </span>
-              {clicked.darkvoid ? (
-                <span
-                  aria-hidden="true"
-                  className={`inline-flex items-center justify-center gap-0.5 rounded-full border border-green-600 bg-green-600 py-1 text-xs font-semibold text-white ${actionPillWidthClass}`}
-                >
-                  ✓ Done
-                </span>
-              ) : (
-                <span
-                  aria-hidden="true"
-                  className={`inline-flex items-center justify-center rounded-full border border-zinc-300 py-1 text-xs font-semibold text-zinc-600 dark:border-zinc-600 dark:text-zinc-300 ${actionPillWidthClass}`}
-                >
-                  Go
-                </span>
-              )}
-            </Link>
-          ) : null}
-
-          <div className="mt-3">
+          <div className="mt-1.5 space-y-1">
             {emailRowFullyClickable ? (
-              <div className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-800 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200">
-                <span className="inline-flex min-w-0 flex-1 items-center gap-2 pr-3">
+              <div className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-sm text-zinc-800 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200">
+                <span className="inline-flex min-w-0 flex-1 items-center gap-1 pr-1.5">
                   <span className="shrink-0 text-zinc-700 dark:text-zinc-300">
                     <RowIcon icon="email" />
                   </span>
@@ -261,8 +265,8 @@ export default function UscEngagementCard({
                 </button>
               </div>
             ) : (
-              <div className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-800 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200">
-                <span className="inline-flex min-w-0 flex-1 items-center gap-2 pr-3">
+              <div className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-sm text-zinc-800 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200">
+                <span className="inline-flex min-w-0 flex-1 items-center gap-1 pr-1.5">
                   <span className="text-zinc-700 dark:text-zinc-300">
                     <RowIcon icon="email" />
                   </span>
@@ -289,16 +293,16 @@ export default function UscEngagementCard({
         <div
           className={
             isStacked
-              ? "w-full"
-              : "mx-auto min-h-0 w-full max-w-2xl md:mx-0 md:h-full md:max-w-none"
+              ? "flex w-full flex-col gap-3"
+              : "mx-auto flex min-h-0 w-full max-w-2xl flex-col gap-3 md:mx-0 md:h-full md:max-w-none"
           }
         >
           {photoLayout === "both" ? (
             <div
               className={
                 isStacked
-                  ? "grid w-full grid-cols-2 gap-2 sm:gap-3"
-                  : "grid min-h-0 w-full grid-cols-2 gap-2 sm:gap-3 md:h-full md:gap-2 lg:gap-3"
+                  ? "grid w-full grid-cols-2 gap-1 sm:gap-1.5"
+                  : "grid min-h-0 w-full grid-cols-2 gap-1 sm:gap-1.5 md:h-full md:gap-1 lg:gap-1.5"
               }
             >
               <figure
@@ -359,6 +363,7 @@ export default function UscEngagementCard({
               </div>
             </figure>
           )}
+          {resourceRows}
         </div>
       </div>
     </section>

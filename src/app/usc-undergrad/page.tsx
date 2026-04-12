@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function UscUndergradPage() {
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-6 pb-14 pt-8 sm:px-8">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-4 px-3 pb-7 pt-4 sm:px-4">
       <UscEngagementCard
         photoLayout="undergrad"
         layout="stack"
