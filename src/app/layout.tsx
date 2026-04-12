@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import PersonJsonLd from "@/components/person-json-ld";
 import ThemeModeSelect from "@/components/theme-mode-select";
+import { defaultSiteDescription } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,8 +23,36 @@ export const metadata: Metadata = {
     default: "Patrick Millegan",
     template: "%s | Patrick Millegan",
   },
-  description:
-    "Project playground for Patrick Millegan with experiments, reusable examples, and active builds.",
+  description: defaultSiteDescription,
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Patrick Millegan",
+    locale: "en_US",
+    title: "Patrick Millegan",
+    description: defaultSiteDescription,
+    images: [
+      {
+        url: "/profile.jpg",
+        width: 560,
+        height: 560,
+        alt: "Patrick Millegan",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Patrick Millegan",
+    description: defaultSiteDescription,
+    images: ["/profile.jpg"],
+  },
 };
 
 export default function RootLayout({
@@ -42,15 +72,12 @@ export default function RootLayout({
             __html: `(function(){try{var m=localStorage.getItem('theme-preference')||'system';var s=window.matchMedia('(prefers-color-scheme: dark)').matches;var d=m==='dark'||(m==='system'&&s);document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light';}catch(e){}})();`,
           }}
         />
-        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       </head>
       <body
         className="flex min-h-full flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100"
         suppressHydrationWarning
       >
+        <PersonJsonLd />
         <header className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
           <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4 sm:px-8">
             <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-zinc-900 dark:text-zinc-100">

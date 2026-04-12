@@ -1,5 +1,25 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { projectLinks } from "@/data/site";
+
+const projectsDescription =
+  "Projects by Patrick Millegan: Shopify customer accounts, Keap Athletics, Cash Game Host, USC guest lectures, and more.";
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description: projectsDescription,
+  alternates: {
+    canonical: "/projects",
+  },
+  openGraph: {
+    title: "Projects",
+    description: projectsDescription,
+    url: "/projects",
+  },
+  twitter: {
+    description: projectsDescription,
+  },
+};
 
 function getProjectDomain(url: string) {
   try {
