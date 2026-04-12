@@ -40,12 +40,7 @@ export default function ProjectsPage() {
                     height={20}
                     className="mt-0.5 shrink-0 rounded-sm"
                   />
-                  <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
-                    <p className="font-medium text-zinc-900 dark:text-zinc-100">{project.name}</p>
-                    <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
-                      {project.badge}
-                    </span>
-                  </div>
+                  <p className="min-w-0 font-medium text-zinc-900 dark:text-zinc-100">{project.name}</p>
                 </div>
                 <a
                   href={project.url}
