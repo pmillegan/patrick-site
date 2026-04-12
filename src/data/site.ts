@@ -1,4 +1,14 @@
-export const projectLinks = [
+export type ProjectLink = {
+  name: string;
+  url: string;
+  description: string;
+  /** When set, used only for the favicon (e.g. school branding while `url` stays on patrickmillegan.com). */
+  faviconDomain?: string;
+  /** When false, hide the Visit link (URL can stay for later). Default: show. */
+  showVisit?: boolean;
+};
+
+export const projectLinks: ProjectLink[] = [
   {
     name: "Shopify Customer Accounts & Sign-in",
     url: "https://www.shopify.com/customer-accounts",
@@ -16,5 +26,13 @@ export const projectLinks = [
     url: "https://cashgamehost.com/",
     description:
       "A free app for hosting home poker nights with digital buy-in tracking and simple settle-up flows.",
+  },
+  {
+    name: "Guest lecturing for USC",
+    url: "https://patrickmillegan.com/usc",
+    faviconDomain: "usc.edu",
+    showVisit: false,
+    description:
+      "Guest lecturing on product management at the USC Marshall School of Business.",
   },
 ];

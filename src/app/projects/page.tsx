@@ -23,8 +23,8 @@ export default function ProjectsPage() {
 
       <ul className="flex list-none flex-col gap-3 p-0" aria-labelledby="projects-heading">
         {projectLinks.map((project) => {
-          const domain = getProjectDomain(project.url);
-          const faviconUrl = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
+          const faviconDomain = project.faviconDomain ?? getProjectDomain(project.url);
+          const faviconUrl = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(faviconDomain)}&sz=64`;
 
           return (
             <li
@@ -42,14 +42,16 @@ export default function ProjectsPage() {
                   />
                   <p className="min-w-0 font-medium text-zinc-900 dark:text-zinc-100">{project.name}</p>
                 </div>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="shrink-0 pt-0.5 text-sm font-medium text-zinc-700 underline hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
-                >
-                  Visit
-                </a>
+                {project.showVisit !== false ? (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="shrink-0 pt-0.5 text-sm font-medium text-zinc-700 underline hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
+                  >
+                    Visit
+                  </a>
+                ) : null}
               </div>
               <p className="text-sm leading-6 text-zinc-600 dark:text-zinc-400">{project.description}</p>
             </li>
