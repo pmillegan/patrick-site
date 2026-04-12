@@ -28,7 +28,6 @@ export const metadata: Metadata = {
     icon: [
       { url: "/favicon.ico" },
       { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
@@ -79,7 +78,7 @@ export default function RootLayout({
       >
         <PersonJsonLd />
         <header className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
-          <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4 sm:px-8">
+          <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-3 py-4 sm:px-4">
             <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-zinc-900 dark:text-zinc-100">
               <span className="inline-flex h-7 w-7 overflow-hidden rounded-full border border-zinc-300 dark:border-zinc-700">
                 <Image src="/profile.jpg" alt="Patrick Millegan" width={56} height={56} className="h-full w-full object-cover" />
@@ -94,8 +93,8 @@ export default function RootLayout({
           </div>
         </header>
         {children}
-        <footer className="mt-auto border-t border-zinc-200 px-6 py-4 dark:border-zinc-800 sm:px-8">
-          <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4">
+        <footer className="mt-auto border-t border-zinc-200 py-4 dark:border-zinc-800">
+          <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-3 sm:px-4">
             <div className="flex items-center gap-4 text-sm text-zinc-700 dark:text-zinc-300">
               <a
                 href="https://linkedin.com/in/pmillegan"
