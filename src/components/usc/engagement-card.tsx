@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-type EngagementKey = "twitter" | "linkedin" | "post" | "slides";
-type EngagementIcon = "x" | "linkedin" | "slides";
+type EngagementKey = "twitter" | "linkedin" | "post" | "slides" | "darkvoid";
+type EngagementIcon = "x" | "linkedin" | "slides" | "diamond";
 
 /** Google Slides deck for the USC guest lecture (shared with undergrad/grad pages). */
 export const USC_GUEST_LECTURE_SLIDES_HREF =
@@ -19,7 +20,7 @@ const engagementLinks: Array<{ id: Exclude<EngagementKey, "slides">; label: stri
   },
   {
     id: "post",
-    label: "Like or repost",
+    label: "Like, comment, or repost!",
     href: "https://www.linkedin.com/feed/update/urn:li:ugcPost:7448413039529422848/",
     icon: "linkedin",
   },
@@ -32,6 +33,14 @@ const engagementLinks: Array<{ id: Exclude<EngagementKey, "slides">; label: stri
 ];
 
 function RowIcon({ icon }: { icon: EngagementIcon | "email" }) {
+  if (icon === "diamond") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
+        <path d="M12 5 16.5 12 12 19 7.5 12 12 5z" />
+      </svg>
+    );
+  }
+
   if (icon === "slides") {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
@@ -75,20 +84,25 @@ type UscEngagementCardProps = {
   layout?: "split" | "stack";
   /** When set, adds a row after “Follow me on X” linking to the guest lecture slides (undergrad/grad). */
   presentationHref?: string;
+  /** Shorter “you” intro for `/usc-undergrad` and `/usc-grad`; default keeps Marshall wording for `/usc`. */
+  personalIntro?: boolean;
 };
 
 export default function UscEngagementCard({
   photoLayout = "both",
   layout = "split",
   presentationHref,
+  personalIntro = false,
 }: UscEngagementCardProps) {
   const isStacked = layout === "stack";
+  /** Undergrad + grad pages: whole email row copies; combined `/usc` keeps a dedicated Copy control. */
+  const emailRowFullyClickable = isStacked && photoLayout !== "both";
   const linkRows: Array<{ id: EngagementKey; label: string; href: string; icon: EngagementIcon }> = presentationHref
     ? [
         ...engagementLinks,
         {
           id: "slides",
-          label: "View the presentation slides",
+          label: "View presentation slides",
           href: presentationHref,
           icon: "slides",
         },
@@ -99,8 +113,17 @@ export default function UscEngagementCard({
     post: false,
     twitter: false,
     slides: false,
+    darkvoid: false,
   });
   const [emailCopied, setEmailCopied] = useState(false);
+
+  useEffect(() => {
+    if (!emailCopied) {
+      return;
+    }
+    const id = window.setTimeout(() => setEmailCopied(false), 3000);
+    return () => window.clearTimeout(id);
+  }, [emailCopied]);
 
   function onLinkClick(id: EngagementKey) {
     setClicked((previous) => ({ ...previous, [id]: true }));
@@ -126,9 +149,16 @@ export default function UscEngagementCard({
           </span>
           I had a blast chatting with you all!
         </h2>
-        <p className="text-sm leading-6 text-zinc-700 dark:text-zinc-300">
-          I would love to stay connected with everyone from USC Marshall. Keep in touch through the links below.
-        </p>
+        {personalIntro ? (
+          <div className="space-y-1 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+            <p>I would love to stay connected with you!</p>
+            <p>Keep in touch through the links below.</p>
+          </div>
+        ) : (
+          <p className="text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+            I would love to stay connected with everyone from USC Marshall. Keep in touch through the links below.
+          </p>
+        )}
       </div>
 
       <div
@@ -178,27 +208,92 @@ export default function UscEngagementCard({
             </p>
           ) : null}
 
-          <div className="mt-3">
-            <div className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-800 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200">
-              <span className="inline-flex min-w-0 flex-1 items-center gap-2 pr-3">
+          {photoLayout === "undergrad" ? (
+            <Link
+              href="/darkvoid"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="In-class exercise — the Dark Void page on patrickmillegan.com"
+              onClick={() => onLinkClick("darkvoid")}
+              className="mt-3 flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-4 py-3 text-sm font-medium text-zinc-800 transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+            >
+              <span className="inline-flex min-w-0 items-center gap-2">
                 <span className="text-zinc-700 dark:text-zinc-300">
-                  <RowIcon icon="email" />
+                  <RowIcon icon="diamond" />
                 </span>
-                <span className="min-w-0 font-medium">Email</span>
-                <span className="min-w-0 truncate font-bold">PatrickMillegan@gmail.com</span>
+                <span>View Dark Void</span>
               </span>
-              <button
-                type="button"
-                onClick={onCopyEmail}
-                className={
-                  emailCopied
-                    ? `cursor-pointer inline-flex items-center justify-center gap-0.5 rounded-full border border-green-600 bg-green-600 py-1 text-xs font-semibold text-white ${actionPillWidthClass}`
-                    : `cursor-pointer inline-flex items-center justify-center rounded-full border border-zinc-300 py-1 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800 ${actionPillWidthClass}`
-                }
-              >
-                {emailCopied ? "✓ Copied" : "Copy"}
-              </button>
-            </div>
+              {clicked.darkvoid ? (
+                <span
+                  aria-hidden="true"
+                  className={`inline-flex items-center justify-center gap-0.5 rounded-full border border-green-600 bg-green-600 py-1 text-xs font-semibold text-white ${actionPillWidthClass}`}
+                >
+                  ✓ Done
+                </span>
+              ) : (
+                <span
+                  aria-hidden="true"
+                  className={`inline-flex items-center justify-center rounded-full border border-zinc-300 py-1 text-xs font-semibold text-zinc-600 dark:border-zinc-600 dark:text-zinc-300 ${actionPillWidthClass}`}
+                >
+                  Go
+                </span>
+              )}
+            </Link>
+          ) : null}
+
+          <div className="mt-3">
+            {emailRowFullyClickable ? (
+              <div className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-800 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200">
+                <span className="inline-flex min-w-0 flex-1 items-center gap-2 pr-3">
+                  <span className="shrink-0 text-zinc-700 dark:text-zinc-300">
+                    <RowIcon icon="email" />
+                  </span>
+                  <span className="shrink-0 font-medium">Email</span>
+                  <span className="min-w-0 flex-1 cursor-text truncate font-bold select-text">
+                    PatrickMillegan@gmail.com
+                  </span>
+                </span>
+                <button
+                  type="button"
+                  onClick={onCopyEmail}
+                  aria-label={
+                    emailCopied
+                      ? "Email copied to clipboard"
+                      : "Copy email address PatrickMillegan@gmail.com"
+                  }
+                  className={
+                    emailCopied
+                      ? `shrink-0 cursor-pointer inline-flex items-center justify-center rounded-full border border-green-600 bg-green-600 py-1 text-xs font-semibold text-white ${actionPillWidthClass}`
+                      : `shrink-0 cursor-pointer inline-flex items-center justify-center rounded-full border border-zinc-300 py-1 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800 ${actionPillWidthClass}`
+                  }
+                >
+                  {emailCopied ? "Copied" : "Copy"}
+                </button>
+              </div>
+            ) : (
+              <div className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-800 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200">
+                <span className="inline-flex min-w-0 flex-1 items-center gap-2 pr-3">
+                  <span className="text-zinc-700 dark:text-zinc-300">
+                    <RowIcon icon="email" />
+                  </span>
+                  <span className="min-w-0 font-medium">Email</span>
+                  <span className="min-w-0 cursor-text truncate font-bold select-text">
+                    PatrickMillegan@gmail.com
+                  </span>
+                </span>
+                <button
+                  type="button"
+                  onClick={onCopyEmail}
+                  className={
+                    emailCopied
+                      ? `cursor-pointer inline-flex items-center justify-center rounded-full border border-green-600 bg-green-600 py-1 text-xs font-semibold text-white ${actionPillWidthClass}`
+                      : `cursor-pointer inline-flex items-center justify-center rounded-full border border-zinc-300 py-1 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800 ${actionPillWidthClass}`
+                  }
+                >
+                  {emailCopied ? "Copied" : "Copy"}
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
