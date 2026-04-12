@@ -13,7 +13,6 @@ export default function UscUndergradPage() {
         photoLayout="undergrad"
         layout="stack"
         presentationHref={USC_GUEST_LECTURE_SLIDES_HREF}
-        personalIntro
       />
     </main>
   );

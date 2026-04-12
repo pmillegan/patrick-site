@@ -49,7 +49,10 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="PMillegan" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className="flex min-h-full flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+      <body
+        className="flex min-h-full flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100"
+        suppressHydrationWarning
+      >
         <header className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
           <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4 sm:px-8">
             <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-zinc-900 dark:text-zinc-100">

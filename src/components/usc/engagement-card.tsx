@@ -84,15 +84,12 @@ type UscEngagementCardProps = {
   layout?: "split" | "stack";
   /** When set, adds a Presentation slides row below the class photo(s). */
   presentationHref?: string;
-  /** Shorter “you” intro for `/usc-undergrad` and `/usc-grad`; default keeps Marshall wording for `/usc`. */
-  personalIntro?: boolean;
 };
 
 export default function UscEngagementCard({
   photoLayout = "both",
   layout = "split",
   presentationHref,
-  personalIntro = false,
 }: UscEngagementCardProps) {
   const isStacked = layout === "stack";
   /** Undergrad + grad pages: whole email row copies; combined `/usc` keeps a dedicated Copy control. */
@@ -177,22 +174,21 @@ export default function UscEngagementCard({
 
   return (
     <section className="rounded-2xl border border-zinc-200 bg-white p-3 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-      <div className="space-y-1">
+      <div className="space-y-2">
         <h2 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-          <span aria-hidden="true" className="mr-2">
+          {"Let's stay connected!"}
+          <span aria-hidden="true" className="ml-2">
             👋
           </span>
-          I had a blast chatting with you all!
         </h2>
-        {personalIntro ? (
-          <p className="text-sm leading-6 text-zinc-700 dark:text-zinc-300">
-            I would love to stay connected. Keep in touch through the links below.
+        <div className="space-y-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+          <p>
+            {
+              "I had so much fun chatting with you all about product management! You all have such bright futures ahead! Please keep in touch using the links below."
+            }
           </p>
-        ) : (
-          <p className="text-sm leading-6 text-zinc-700 dark:text-zinc-300">
-            I would love to stay connected with everyone from USC Marshall. Keep in touch through the links below.
-          </p>
-        )}
+          <p className="text-zinc-800 dark:text-zinc-200">- Patrick</p>
+        </div>
       </div>
 
       <div
