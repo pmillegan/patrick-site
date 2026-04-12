@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -57,12 +56,6 @@ export default function Home() {
                 <path d="M14 3H21V10H19V6.41L12.7 12.71L11.29 11.29L17.59 5H14V3ZM5 5H10V7H7V17H17V14H19V19H5V5Z" />
               </svg>
             </a>
-            <Link
-              href="/projects"
-              className="inline-flex items-center rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
-            >
-              View projects
-            </Link>
           </div>
         </div>
       </section>
