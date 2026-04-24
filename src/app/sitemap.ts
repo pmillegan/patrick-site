@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/usc/thank-you",
     "/usc/submit",
     "/darkvoid",
+    "/crokinole",
   ];
 
   const staticEntries: MetadataRoute.Sitemap = staticPaths.map((path) => ({

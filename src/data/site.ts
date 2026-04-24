@@ -78,6 +78,13 @@ export const projectLinks: ProjectLink[] = [
       "A free app for hosting home poker nights with digital buy-in tracking and simple settle-up flows.",
   },
   {
+    name: "Crokinole Scorekeeper",
+    url: "https://patrickmillegan.com/crokinole",
+    faviconDomain: "patrickmillegan.com",
+    description:
+      "A simple scorekeeper for crokinole — supports conventional (cancellation, play to 100) and tournament (4-round, 2/1/0) modes with game history.",
+  },
+  {
     name: "Guest lecturing for USC",
     url: USC_LINKEDIN_GUEST_LECTURE_POST_HREF,
     faviconDomain: "usc.edu",
