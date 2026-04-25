@@ -366,7 +366,7 @@ function NewGameForm({
             type="text"
             value={side1Name}
             onChange={(event) => setSide1Name(event.target.value)}
-            placeholder="Patrick"
+            placeholder="Side 1"
             className="mt-1 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600 dark:focus:border-zinc-100"
           />
         </div>
@@ -379,7 +379,7 @@ function NewGameForm({
             type="text"
             value={side2Name}
             onChange={(event) => setSide2Name(event.target.value)}
-            placeholder="Opponent"
+            placeholder="Side 2"
             className="mt-1 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600 dark:focus:border-zinc-100"
           />
         </div>
@@ -423,7 +423,7 @@ function NewGameForm({
         <div className="sm:col-span-2">
           <button
             type="submit"
-            className="w-full rounded-full bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 sm:w-auto"
+            className="w-full rounded-full bg-[#d52b1e] px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-[#b8221a] sm:w-auto"
           >
             Start game
           </button>
@@ -492,8 +492,16 @@ function ActiveGameCard({
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3">
-        <ScoreTile name={game.side1Name} value={totals.side1} />
-        <ScoreTile name={game.side2Name} value={totals.side2} />
+        <ScoreTile
+          name={game.side1Name}
+          value={totals.side1}
+          leading={totals.side1 > totals.side2}
+        />
+        <ScoreTile
+          name={game.side2Name}
+          value={totals.side2}
+          leading={totals.side2 > totals.side1}
+        />
       </div>
 
       {remaining !== null ? (
@@ -506,7 +514,7 @@ function ActiveGameCard({
 
       <form onSubmit={handleSubmit} className="mt-5 space-y-3">
         <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-          Round {roundNumber} — board points
+          Round {roundNumber} — biscuits on the board
         </p>
         <div className="grid grid-cols-2 gap-3">
           <RoundInput
@@ -523,7 +531,8 @@ function ActiveGameCard({
           />
         </div>
         <p className="text-xs text-zinc-500 dark:text-zinc-500">
-          Enter each side&apos;s total board points for the round (5s + 10s + 15s + 20s).
+          Add up each side&apos;s biscuits — 5s, 10s, 15s, and 20s — and enter
+          the totals.
           {game.mode === "conventional"
             ? " The app applies cancellation."
             : " The app awards 2/1/0 round points automatically."}
@@ -533,7 +542,7 @@ function ActiveGameCard({
           <button
             type="submit"
             disabled={remaining === 0}
-            className="rounded-full bg-zinc-900 px-5 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+            className="rounded-full bg-[#d52b1e] px-5 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-[#b8221a] disabled:cursor-not-allowed disabled:opacity-50"
           >
             Save round
           </button>
@@ -570,13 +579,39 @@ function ActiveGameCard({
   );
 }
 
-function ScoreTile({ name, value }: { name: string; value: number }) {
+function ScoreTile({
+  name,
+  value,
+  leading,
+}: {
+  name: string;
+  value: number;
+  leading: boolean;
+}) {
   return (
-    <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-center dark:border-zinc-800 dark:bg-zinc-950">
-      <p className="truncate text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+    <div
+      className={`rounded-xl border p-3 text-center transition-colors ${
+        leading
+          ? "border-[#d52b1e]/40 bg-[#d52b1e]/5 dark:border-[#d52b1e]/40 dark:bg-[#d52b1e]/10"
+          : "border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950"
+      }`}
+    >
+      <p
+        className={`truncate text-xs font-medium uppercase tracking-wide ${
+          leading
+            ? "text-[#a8221a] dark:text-[#ff5a4a]"
+            : "text-zinc-500 dark:text-zinc-400"
+        }`}
+      >
         {name}
       </p>
-      <p className="mt-1 text-4xl font-semibold tabular-nums text-zinc-900 dark:text-zinc-100">
+      <p
+        className={`mt-1 text-4xl font-semibold tabular-nums ${
+          leading
+            ? "text-[#a8221a] dark:text-[#ff5a4a]"
+            : "text-zinc-900 dark:text-zinc-100"
+        }`}
+      >
         {value}
       </p>
     </div>
