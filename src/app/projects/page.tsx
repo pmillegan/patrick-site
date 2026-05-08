@@ -63,6 +63,10 @@ export default function ProjectsPage() {
         {projectLinks.map((project) => {
           const faviconDomain = project.faviconDomain ?? getProjectDomain(project.url);
           const faviconUrl = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(faviconDomain)}&sz=64`;
+          const iconUrl = project.iconImageUrl ?? faviconUrl;
+          const iconAlt = project.iconImageUrl
+            ? `${project.name} icon`
+            : `${project.name} favicon`;
           const isUscGuestLecture = project.name === "Guest lecturing for USC";
           const uscGalleryPhotos = [
             { src: "/undergrad.jpg", alt: "USC Marshall undergraduate class", label: "Undergraduate" },
@@ -82,14 +86,28 @@ export default function ProjectsPage() {
               <div className="flex items-start justify-between gap-3">
                 <div className="flex min-w-0 flex-1 items-start gap-3">
                   <Image
-                    src={faviconUrl}
-                    alt={`${project.name} favicon`}
+                    src={iconUrl}
+                    alt={iconAlt}
                     width={20}
                     height={20}
                     className="mt-0.5 shrink-0 rounded-sm"
                   />
                   <p className="min-w-0 font-medium text-zinc-900 dark:text-zinc-100">{project.name}</p>
                 </div>
+                {project.role || project.years ? (
+                  <div className="shrink-0 text-right">
+                    {project.role ? (
+                      <p className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+                        {project.role}
+                      </p>
+                    ) : null}
+                    {project.years ? (
+                      <p className="text-xs text-zinc-500 dark:text-zinc-500">
+                        {project.years}
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
               <p className="text-sm leading-6 text-zinc-600 dark:text-zinc-400">{project.description}</p>
               {hasCollapsibleMedia || showVisitLink ? (

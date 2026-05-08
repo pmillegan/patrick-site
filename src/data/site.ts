@@ -6,6 +6,12 @@ export type ProjectLink = {
   name: string;
   url: string;
   description: string;
+  /** Optional role shown in the project card header (resume-style metadata). */
+  role?: string;
+  /** Optional date range shown in the project card header (resume-style metadata). */
+  years?: string;
+  /** Optional icon image URL for the project card (replaces favicon rendering when provided). */
+  iconImageUrl?: string;
   /** When set, used only for the favicon (e.g. school branding while `url` stays on patrickmillegan.com). */
   faviconDomain?: string;
   /** When false, hide the Visit link (URL can stay for later). Default: show. */
@@ -23,6 +29,8 @@ export const projectLinks: ProjectLink[] = [
   {
     name: "Shopify Customer Accounts & Sign-in",
     url: "https://www.shopify.com/customer-accounts",
+    role: "Senior Product Lead",
+    years: "2021-2026",
     description:
       "Shopify's customer account experience for one-click sign-in and self-serve order, return, and subscription management.",
     mediaLinks: [
@@ -46,8 +54,17 @@ export const projectLinks: ProjectLink[] = [
     ],
   },
   {
+    name: "Guest lecturing for USC",
+    url: USC_LINKEDIN_GUEST_LECTURE_POST_HREF,
+    faviconDomain: "usc.edu",
+    description:
+      "Guest lecturing on product management at the USC Marshall School of Business.",
+  },
+  {
     name: "Keap Athletics",
     url: "https://keapathletics.com",
+    role: "Founder",
+    years: "2015-present",
     description:
       "An athletic apparel brand focused on shorts with secure, curved pockets that keep essentials in place.",
     mediaLinks: [
@@ -74,8 +91,34 @@ export const projectLinks: ProjectLink[] = [
   {
     name: "Cash Game Host",
     url: "https://cashgamehost.com/",
+    role: "Founder",
+    years: "2025-present",
     description:
       "A free app for hosting home poker nights with digital buy-in tracking and simple settle-up flows.",
+  },
+  {
+    name: "Green Chef",
+    url: "https://www.greenchef.com",
+    role: "Senior Director of Product",
+    years: "2015-2019",
+    description:
+      "Led product strategy and execution for Green Chef's core customer, subscription, and growth experiences.",
+  },
+  {
+    name: "Star Wars Commander",
+    url: "https://en.wikipedia.org/wiki/Star_Wars_Commander",
+    iconImageUrl: "https://upload.wikimedia.org/wikipedia/en/c/cb/Star_Wars_Commander_Icon.png",
+    role: "Product Lead",
+    years: "2013-2015",
+    description:
+      "Product lead for Star Wars Commander, a mobile strategy game where players build, battle, and choose the Rebel Alliance or Galactic Empire.",
+    mediaLinks: [
+      {
+        label: "Gamezebo",
+        url: "https://www.gamezebo.com/play/star-wars-commander-has-the-best-rate-this-game-screen-ever/",
+        platform: "article",
+      },
+    ],
   },
   {
     name: "Crokinole Scorekeeper",
@@ -83,12 +126,5 @@ export const projectLinks: ProjectLink[] = [
     faviconDomain: "patrickmillegan.com",
     description:
       "A simple scorekeeper for crokinole — supports conventional (cancellation, play to 100) and tournament (4-round, 2/1/0) modes with game history.",
-  },
-  {
-    name: "Guest lecturing for USC",
-    url: USC_LINKEDIN_GUEST_LECTURE_POST_HREF,
-    faviconDomain: "usc.edu",
-    description:
-      "Guest lecturing on product management at the USC Marshall School of Business.",
   },
 ];

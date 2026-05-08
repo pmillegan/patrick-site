@@ -85,11 +85,6 @@ export default function RootLayout({
               </span>
               PATRICK MILLEGAN
             </Link>
-            <nav className="flex items-center gap-5 text-sm text-zinc-700 dark:text-zinc-300">
-              <Link href="/projects" className="hover:text-zinc-900 dark:hover:text-zinc-100">
-                Projects
-              </Link>
-            </nav>
           </div>
         </header>
         {children}

@@ -38,6 +38,11 @@ const nextConfig: NextConfig = {
         hostname: "mensgear.net",
         pathname: "/wp-content/**",
       },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+        pathname: "/wikipedia/**",
+      },
     ],
   },
 };

@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const actionPillWidthClass = "w-[5rem] shrink-0 whitespace-nowrap px-2";
 
-type SocialId = "linkedin" | "twitter";
+type SocialId = "linkedin" | "twitter" | "calendly" | "projects";
 
 function LinkedInIcon() {
   return (
@@ -22,23 +22,55 @@ function XIcon() {
   );
 }
 
+function CalendarIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
+      <path d="M7 2a1 1 0 011 1v1h8V3a1 1 0 112 0v1h1a3 3 0 013 3v12a3 3 0 01-3 3H5a3 3 0 01-3-3V7a3 3 0 013-3h1V3a1 1 0 011-1zm13 8H4v9a1 1 0 001 1h14a1 1 0 001-1v-9zM5 6a1 1 0 00-1 1v1h16V7a1 1 0 00-1-1h-1v1a1 1 0 11-2 0V6H8v1a1 1 0 11-2 0V6H5z" />
+    </svg>
+  );
+}
+
+function ProjectsIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
+      <path d="M3 6a2 2 0 012-2h4l2 2h8a2 2 0 012 2v1H3V6zm0 4h18v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8z" />
+    </svg>
+  );
+}
+
 const followLinks: Array<{
   id: SocialId;
   label: string;
   href: string;
-  icon: "linkedin" | "x";
+  icon: "linkedin" | "x" | "calendar" | "projects";
+  external?: boolean;
 }> = [
   {
     id: "linkedin",
-    label: "Patrick",
+    label: "in/Pmillegan",
     href: "https://linkedin.com/in/pmillegan",
     icon: "linkedin",
+    external: true,
   },
   {
     id: "twitter",
     label: "@Pmillegan",
     href: "https://x.com/pmillegan",
     icon: "x",
+    external: true,
+  },
+  {
+    id: "calendly",
+    label: "Book time with me",
+    href: "https://calendly.com/patrickmillegan/30min",
+    icon: "calendar",
+    external: true,
+  },
+  {
+    id: "projects",
+    label: "See what I've worked on",
+    href: "/projects",
+    icon: "projects",
   },
 ];
 
@@ -46,6 +78,8 @@ export default function HomeFollowRows() {
   const [clicked, setClicked] = useState<Record<SocialId, boolean>>({
     linkedin: false,
     twitter: false,
+    calendly: false,
+    projects: false,
   });
 
   function onLinkClick(id: SocialId) {
@@ -58,14 +92,22 @@ export default function HomeFollowRows() {
         <a
           key={item.id}
           href={item.href}
-          target="_blank"
-          rel="noreferrer"
+          target={item.external ? "_blank" : undefined}
+          rel={item.external ? "noreferrer" : undefined}
           onClick={() => onLinkClick(item.id)}
           className="flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-sm font-medium text-zinc-800 transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           <span className="inline-flex items-center gap-1">
             <span className="text-zinc-700 dark:text-zinc-300">
-              {item.icon === "linkedin" ? <LinkedInIcon /> : <XIcon />}
+              {item.icon === "linkedin" ? (
+                <LinkedInIcon />
+              ) : item.icon === "x" ? (
+                <XIcon />
+              ) : item.icon === "calendar" ? (
+                <CalendarIcon />
+              ) : (
+                <ProjectsIcon />
+              )}
             </span>
             <span>{item.label}</span>
           </span>
@@ -81,7 +123,13 @@ export default function HomeFollowRows() {
               aria-hidden="true"
               className={`inline-flex items-center justify-center rounded-full border border-zinc-300 py-1 text-xs font-semibold text-zinc-600 dark:border-zinc-600 dark:text-zinc-300 ${actionPillWidthClass}`}
             >
-              {item.id === "linkedin" ? "Connect" : "Follow"}
+              {item.id === "linkedin"
+                ? "Connect"
+                : item.id === "twitter"
+                  ? "Follow"
+                  : item.id === "calendly"
+                    ? "Book"
+                    : "View"}
             </span>
           )}
         </a>

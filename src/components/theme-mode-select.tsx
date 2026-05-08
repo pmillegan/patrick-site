@@ -23,13 +23,19 @@ function applyTheme(mode: ThemeMode) {
 }
 
 export default function ThemeModeSelect() {
-  const [mode, setMode] = useState<ThemeMode>("system");
+  const [mode, setMode] = useState<ThemeMode>(() => {
+    if (typeof window === "undefined") {
+      return "system";
+    }
+    const storedMode = localStorage.getItem(STORAGE_KEY);
+    return storedMode === "light" || storedMode === "dark" || storedMode === "system"
+      ? storedMode
+      : "system";
+  });
 
   useEffect(() => {
-    const storedMode = (localStorage.getItem(STORAGE_KEY) as ThemeMode | null) ?? "system";
-    setMode(storedMode);
-    applyTheme(storedMode);
-  }, []);
+    applyTheme(mode);
+  }, [mode]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
