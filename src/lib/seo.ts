@@ -6,4 +6,4 @@ export const siteUrl = "https://patrickmillegan.com";
  * Kept as one complete thought so Google is less likely to stitch in other page text.
  */
 export const defaultSiteDescription =
-  "Patrick Millegan is the founder and CEO of Untoil and a product developer in San Mateo, CA. His work spans Shopify, Keap Athletics, guest lectures at USC Marshall, and more. Connect to LinkedIn, X, or book time with me.";
+  "Patrick Millegan is the founder and CEO of Untoil. He is a product developer in San Mateo, CA. His work spans Shopify, Keap Athletics, guest lectures at USC Marshall, and more. Connect to LinkedIn, X, or book time with me.";
