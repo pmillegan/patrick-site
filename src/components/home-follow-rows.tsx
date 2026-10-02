@@ -68,7 +68,7 @@ const followLinks: Array<{
   },
   {
     id: "projects",
-    label: "See what I've worked on",
+    label: "See my work",
     href: "/projects",
     icon: "projects",
   },
