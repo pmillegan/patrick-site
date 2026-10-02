@@ -12,9 +12,9 @@ const personAndWebsiteJsonLd = {
       name: "Patrick Millegan",
       url: siteUrl,
       image: profileImageUrl,
-      jobTitle: "Product developer",
+      jobTitle: "Founder and CEO, Untoil",
       description:
-        "Product developer based in San Mateo, California. Work spans Shopify, Keap Athletics, guest lectures at USC Marshall, and independent projects.",
+        "Founder and CEO of Untoil, based in San Mateo, California. Work spans Shopify, Keap Athletics, guest lectures at USC Marshall, and independent projects.",
       sameAs: [
         "https://www.linkedin.com/in/pmillegan",
         "https://x.com/pmillegan",
@@ -50,6 +50,7 @@ export default function PersonJsonLd() {
   return (
     <script
       type="application/ld+json"
+      suppressHydrationWarning
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(personAndWebsiteJsonLd),
       }}

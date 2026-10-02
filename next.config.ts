@@ -43,6 +43,11 @@ const nextConfig: NextConfig = {
         hostname: "upload.wikimedia.org",
         pathname: "/wikipedia/**",
       },
+      {
+        protocol: "https",
+        hostname: "untoil.com",
+        pathname: "/favicon-96x96.png",
+      },
     ],
   },
 };

@@ -4,7 +4,7 @@ import UscProjectPhotoGrid from "@/components/projects/usc-project-photo-grid";
 import { projectLinks } from "@/data/site";
 
 const projectsDescription =
-  "Projects by Patrick Millegan: Shopify customer accounts, Keap Athletics, Cash Game Host, USC guest lectures, and more.";
+  "Projects by Patrick Millegan: Untoil, Shopify customer accounts, Keap Athletics, Cash Game Host, USC guest lectures, and more.";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -69,8 +69,26 @@ export default function ProjectsPage() {
             : `${project.name} favicon`;
           const isUscGuestLecture = project.name === "Guest lecturing for USC";
           const uscGalleryPhotos = [
-            { src: "/undergrad.jpg", alt: "USC Marshall undergraduate class", label: "Undergraduate" },
-            { src: "/grad.jpg", alt: "USC Marshall graduate class", label: "Graduate" },
+            {
+              src: "/undergrad.jpg",
+              alt: "USC Marshall undergraduate class, spring 2026",
+              label: "Undergraduate · Spring 2026",
+            },
+            {
+              src: "/grad.jpg",
+              alt: "USC Marshall graduate class, spring 2026",
+              label: "Graduate · Spring 2026",
+            },
+            {
+              src: "/grad-fall.jpg",
+              alt: "USC Marshall graduate class, fall 2026",
+              label: "Graduate · Fall 2026",
+            },
+            {
+              src: "/undergrad-fall.jpg",
+              alt: "USC Marshall undergraduate class, fall 2026",
+              label: "Undergraduate · Fall 2026",
+            },
           ];
           const hasMediaTiles = Array.isArray(project.mediaLinks) && project.mediaLinks.length > 0;
           const hasCollapsibleMedia = isUscGuestLecture || hasMediaTiles;

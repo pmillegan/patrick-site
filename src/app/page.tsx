@@ -37,9 +37,16 @@ export default function Home() {
         </div>
         <div className="space-y-4">
           <p className="max-w-2xl text-lg leading-8 text-zinc-700 dark:text-zinc-300">
-            👋 Hi, nice to meet you I&apos;m Patrick Millegan. I&apos;m a product
-            developer in San Mateo, CA. My work spans Shopify, Keap Athletics,
-            guest lectures at USC Marshall, and more.
+            👋 Hi, nice to meet you I&apos;m Patrick Millegan. I&apos;m the founder
+            and CEO of{" "}
+            <a
+              href="https://untoil.com"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100"
+            >
+              Untoil
+            </a>{", and a product developer in San Mateo, CA. My work spans Shopify, Keap Athletics, guest lectures at USC Marshall, and more."}
           </p>
           <HomeFollowRows />
         </div>

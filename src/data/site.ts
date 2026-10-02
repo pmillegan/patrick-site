@@ -27,6 +27,15 @@ export type ProjectLink = {
 
 export const projectLinks: ProjectLink[] = [
   {
+    name: "Untoil",
+    url: "https://untoil.com",
+    iconImageUrl: "https://untoil.com/favicon-96x96.png",
+    role: "Founder",
+    years: "2026-present",
+    description:
+      "Agents that find, price, and help eliminate organizational toil so teams can see the most expensive friction and what fixing it is worth.",
+  },
+  {
     name: "Shopify Customer Accounts & Sign-in",
     url: "https://www.shopify.com/customer-accounts",
     role: "Senior Product Lead",
